@@ -29,7 +29,7 @@ jobs:
           
       - name: Commit and push changes
         run: |
-          git config --local user.name "Kira818"
+          git config --local user.name "kira"
           git config --local user.email "731064925@qq.com"
           git add config.json
           git commit -m "Add OIDC Token to config.json"
