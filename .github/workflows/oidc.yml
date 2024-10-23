@@ -1,0 +1,22 @@
+name: Get OIDC Token
+
+on:
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  get-token:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch OIDC token
+        id: fetch_token
+        run: |
+          TOKEN=$(curl -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL")
+          echo "OIDC Token: $TOKEN"
+          echo "::set-output name=oidc_token::$TOKEN"
