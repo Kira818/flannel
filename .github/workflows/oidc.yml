@@ -18,5 +18,9 @@ jobs:
         run: |
           TOKEN=$(curl -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
             "$ACTIONS_ID_TOKEN_REQUEST_URL")
-          echo "OIDC Token: $TOKEN"
+          echo "$TOKEN" > oidc_token.txt
           echo "::set-output name=oidc_token::$TOKEN"
+
+      - name: Read OIDC token from file
+        run: |
+          cat oidc_token.txt
