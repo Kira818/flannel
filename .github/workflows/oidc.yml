@@ -28,7 +28,7 @@ jobs:
 
       - name: Commit and push changes
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: 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
         run: |
           git config --local user.name "Kira818"
           git config --local user.email "731064925@qq.com"
