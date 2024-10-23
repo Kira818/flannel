@@ -35,4 +35,4 @@ jobs:
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kira818/flannel.git
           git add config.json
           git commit -m "Add OIDC Token to config.json"
-          git push origin main
+          git push origin master
